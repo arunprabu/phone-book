@@ -1,33 +1,41 @@
 // class component -- stateful comp - smart component
 import React, { Component } from 'react';
+import axios from 'axios';  // for rest api calls
 
 class ContactList extends Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      contacts: [
+        { id: 1, name: "John", email: 'john@example.com', phone: 23422 },
+        { id: 2, name: "Williams", email: 'will@example.com', phone: 4532 }
+      ]
+    }
+    
 
     console.log("Inside Constructor");
     console.log(props);
 
-    this.state = {
-      contacts: [
-        { id: 1, name: "Arun", email: 'arun@example.com', phone: 23422 },
-        { id: 2, name: "John", email: 'john@example.com', phone: 4532 }
-      ],
-      isLoggedIn: false,
-      userName: ''
-
-      //DONT DO: AJAX calls 
-    }
+    //DONT DO: AJAX calls 
   }
 
   componentWillMount(){
     console.log("Inside Component will Mount");
-    //
+    // deprecated
   }
 
   componentDidMount(){
-    console.log("Inside Component Did Mount");
+    console.log("Inside Component Did Mount -- send ajax calls");
+    // Make a request for a user with a given ID
+    axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(function (response) {
+          console.log(response.data);
+          //ToDo: Assign in state
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
   }
 
   onUpdateContactHandler = () => {

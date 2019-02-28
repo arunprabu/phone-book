@@ -10,17 +10,19 @@ class About extends Component {
     }
   }
 
-  onTextChange = (event) => {
+  onTxtChange = (event) => {
+    console.log(event.target.value);
+
     this.setState({
       topic: event.target.value
-    })
+    });
   }
 
   render(){
     return(
       <div>
         <p>I am learning {this.state.topic}</p>
-        <input type="text" onChange={this.onTextChange} value={this.state.topic} />
+        Course Name: <input type="text" onChange={this.onTxtChange} value={this.state.topic}/>
         {/* if you remove onChange it will throw an error in console */}
       </div>
     )
